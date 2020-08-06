@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyles from "./styles/GlobalStyles";
+import MyThemeProvider from "./styles/MyThemeProvider";
+import PageLayout from "./layout/PageLayout";
+import RoutesDefinition from "./core/RoutesDefinition";
+import {Provider} from "react-redux";
+import store from './store'
+import {Router} from "react-router";
+import {history} from "./core/routesHistory";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Provider store={store}>
+            <MyThemeProvider>
+                <GlobalStyles/>
+                <Router history={history}>
+                    <PageLayout>
+                        <RoutesDefinition/>
+                    </PageLayout>
+                </Router>
+            </MyThemeProvider>
+        </Provider>
+    );
 }
 
 export default App;
